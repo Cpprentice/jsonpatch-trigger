@@ -1,6 +1,6 @@
 import jsonpath
 
-from jsonpath_ops.common import make_jsonpath, normalize_jsonpath
+from jsonpatch_plus.common import make_jsonpath, normalize_jsonpath
 
 
 def test_make_jsonpath():

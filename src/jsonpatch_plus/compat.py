@@ -15,7 +15,7 @@ from pydantic.json_schema import JsonSchemaValue
 
 from jsonpath import JSONPath, JSONPointer
 
-from jsonpath_ops import make_jsonpath
+from jsonpatch_plus import make_jsonpath
 
 
 class _JSONPointerPydanticAnnotation:

@@ -6,12 +6,12 @@ from jsonpath.selectors import NameSelector, JSONPathSelector, IndexSelector
 from pydantic import PrivateAttr, Field, ConfigDict, BaseModel, Discriminator, Tag, computed_field, model_validator, \
     ValidationError, model_serializer, field_serializer
 
-from jsonpath_ops import json_type
-from jsonpath_ops.compat import PydanticJSONPath
-from jsonpath_ops.parents import make_parent_key_pairs
-from jsonpath_ops.preconditions import Precondition, IsArrayOrObjectPreconditionFunction, ExistsPreconditionFunction, \
+from jsonpatch_plus import json_type
+from jsonpatch_plus.compat import PydanticJSONPath
+from jsonpatch_plus.parents import make_parent_key_pairs
+from jsonpatch_plus.preconditions import Precondition, IsArrayOrObjectPreconditionFunction, ExistsPreconditionFunction, \
     DoesNotExistPreconditionFunction
-from jsonpath_ops.tracking import ChangeTracker, TrackingJSONPatch, RemovalRegistrationMixin, \
+from jsonpatch_plus.tracking import ChangeTracker, TrackingJSONPatch, RemovalRegistrationMixin, \
     CopyRegistrationMixin, AddRegistrationMixin, MoveRegistrationMixin
 
 

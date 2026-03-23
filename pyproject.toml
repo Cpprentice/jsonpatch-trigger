@@ -3,7 +3,7 @@ name = "jsonpatch-plus"
 version = "0.1.0"
 description = "Extension for JSONPatch (RFC6902) that introduces operation preconditions, change tracking and automated listeners that can introduce new operations based on the previous change"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.11"
 dependencies = [
     "python-jsonpath==2.0.2",
     "pydantic==2.12.5"

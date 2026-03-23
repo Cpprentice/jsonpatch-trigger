@@ -15,9 +15,9 @@ from jsonpath.selectors import NameSelector, KeySelector, WildcardSelector, Keys
     SingularQuerySelector, Filter, KeysFilter, JSONPathSelector
 from pydantic import BaseModel, Field, PrivateAttr, ConfigDict
 
-from jsonpath_ops import make_jsonpath
-from jsonpath_ops.execution import AutomatedOperationProducer, OperationExecutionContext, OperationExecutionDTO
-from jsonpath_ops.operations import CompoundOperation, CopyOperation, RemoveOperation, AddOperation, Operation, \
+from jsonpatch_plus import make_jsonpath
+from jsonpatch_plus.execution import AutomatedOperationProducer, OperationExecutionContext, OperationExecutionDTO
+from jsonpatch_plus.operations import CompoundOperation, CopyOperation, RemoveOperation, AddOperation, Operation, \
     MoveOperation, PairwisePointerPairConstraintResolver
 
 demo_document = {

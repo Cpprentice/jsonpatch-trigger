@@ -5,8 +5,8 @@ import unittest.mock
 import pytest
 from jsonpath import JSONPointer
 
-from jsonpath_ops import make_jsonpath
-from jsonpath_ops.operations import CompoundOperation, Operation, AddOperation
+from jsonpatch_plus import make_jsonpath
+from jsonpatch_plus.operations import CompoundOperation, Operation, AddOperation
 
 
 @pytest.fixture
