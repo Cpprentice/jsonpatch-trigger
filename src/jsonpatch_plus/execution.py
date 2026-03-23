@@ -38,7 +38,20 @@ def can_pointer_match_path(pointer: JSONPointer, path: JSONPath) -> bool:
             elif isinstance(selector, SliceSelector):
                 pass
             elif isinstance(selector, SingularQuerySelector):
-                pass
+                query = selector.query
+                sub_pointer_starting_index = pointer_index
+                inner_solvable = False
+                while sub_pointer_starting_index >= 0:
+                    sub_pointer = JSONPointer.from_parts(pointer.parts[sub_pointer_starting_index:pointer_index + 1])
+                    if can_pointer_match_path(sub_pointer, query):
+                        sub_pointer_starting_index -= 1
+                        inner_solvable = True
+                    else:
+                        sub_pointer_starting_index += 1
+                        break
+                if inner_solvable:
+                    pointer_index -= pointer_index - sub_pointer_starting_index
+                    solvable = True
             elif isinstance(selector, Filter):
                 pass
             elif isinstance(selector, KeysFilter):
@@ -48,7 +61,7 @@ def can_pointer_match_path(pointer: JSONPointer, path: JSONPath) -> bool:
         pointer_index -= 1
         path_index -= 1
 
-    return True
+    return pointer_index == path_index
 
 
 class AutomatedOperationProducer(BaseModel, abc.ABC):
@@ -113,41 +126,41 @@ class AutomatedOperationProducer(BaseModel, abc.ABC):
         ]
 
 
-class OperationExecutionDTO(BaseModel):
-    model_config = ConfigDict(
-        revalidate_instances='never'
-    )
-
-    operations: list[Operation]
-    # listeners: dict[str, list[str]]
-    producers: list[AutomatedOperationProducer]
-
-    @model_validator(mode='after')
-    @classmethod
-    def validate(cls, value: Any):
-        if isinstance(value, cls):
-            return value
-        return cls(**value)
-
-    # @field_validator('operations', mode='before')
-    # @classmethod
-    # def _serialize_operations(cls, operation_list: list[Operation]):
-    #     return [
-    #         op.model_dump()
-    #         for op in operation_list
-    #     ]
-
-    @field_serializer('operations')
-    def serialize_operations(self, operations: list[Operation]) -> list[dict]:
-        return [
-            op.model_dump() for op in operations
-        ]
-
-    @field_serializer('producers')
-    def serialize_producers(self, producers: list[AutomatedOperationProducer]) -> list[dict]:
-        return [
-            prod.model_dump() for prod in producers
-        ]
+# class OperationExecutionDTO(BaseModel):
+#     model_config = ConfigDict(
+#         revalidate_instances='never'
+#     )
+#
+#     operations: list[Operation]
+#     # listeners: dict[str, list[str]]
+#     producers: list[AutomatedOperationProducer]
+#
+#     @model_validator(mode='after')
+#     @classmethod
+#     def validate(cls, value: Any):
+#         if isinstance(value, cls):
+#             return value
+#         return cls(**value)
+#
+#     # @field_validator('operations', mode='before')
+#     # @classmethod
+#     # def _serialize_operations(cls, operation_list: list[Operation]):
+#     #     return [
+#     #         op.model_dump()
+#     #         for op in operation_list
+#     #     ]
+#
+#     @field_serializer('operations')
+#     def serialize_operations(self, operations: list[Operation]) -> list[dict]:
+#         return [
+#             op.model_dump() for op in operations
+#         ]
+#
+#     @field_serializer('producers')
+#     def serialize_producers(self, producers: list[AutomatedOperationProducer]) -> list[dict]:
+#         return [
+#             prod.model_dump() for prod in producers
+#         ]
 
 
 class OperationExecutionContext:
@@ -197,17 +210,17 @@ class OperationExecutionContext:
                 for producer in flat_producer_lookup.values()
             ]
         )
-        return OperationExecutionDTO(
-            operations=list(self.operations),
-            producers=list(flat_producer_lookup.values())
-            # listeners={
-            #     str(path): [
-            #         producer.__class__.__name__
-            #         for producer in producers
-            #     ]
-            #     for path, producers in self.listeners.items()
-            # }
-        )
+        # return OperationExecutionDTO(
+        #     operations=list(self.operations),
+        #     producers=list(flat_producer_lookup.values())
+        #     # listeners={
+        #     #     str(path): [
+        #     #         producer.__class__.__name__
+        #     #         for producer in producers
+        #     #     ]
+        #     #     for path, producers in self.listeners.items()
+        #     # }
+        # )
 
     @classmethod
     def deserialize(cls, data: Any) -> Self:
