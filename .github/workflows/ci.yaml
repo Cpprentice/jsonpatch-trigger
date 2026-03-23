@@ -5,7 +5,7 @@ on:
 
 jobs:
   compute-version:
-    uses: cpprentice/ci-templates/.github/workflows/compute-python-package-version.yaml@v1
+    uses: cpprentice/ci-templates/.github/workflows/compute-python-package-version.yaml@main
   build:
     runs-on: ubuntu-latest
     steps:
