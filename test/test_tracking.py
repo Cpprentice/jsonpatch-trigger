@@ -1,6 +1,6 @@
 from jsonpath import JSONPointer
 
-from jsonpatch_plus.tracking import get_all_subtree_pointers, ChangeTracker
+from jsonpatch_trigger.tracking import get_all_subtree_pointers, ChangeTracker
 
 
 def test_get_all_subtree_pointers():

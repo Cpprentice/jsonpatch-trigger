@@ -3,8 +3,8 @@ from typing import Any
 import pytest
 from jsonpath import JSONPointer
 
-from jsonpatch_plus import make_jsonpath, OperationExecutionContext, AutomatedOperationProducer, Operation, AddOperation
-from jsonpatch_plus.execution import can_pointer_match_path
+from jsonpatch_trigger import make_jsonpath, OperationExecutionContext, AutomatedOperationProducer, Operation, AddOperation
+from jsonpatch_trigger.execution import can_pointer_match_path
 
 
 def test_can_pointer_match_path():

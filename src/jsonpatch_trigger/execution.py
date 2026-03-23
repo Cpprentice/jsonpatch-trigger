@@ -10,9 +10,9 @@ from jsonpath.selectors import NameSelector, KeySelector, WildcardSelector, Keys
 from pydantic import BaseModel, ConfigDict, Field, field_validator, field_serializer, computed_field, model_validator, \
     ValidationError
 
-from jsonpatch_plus import make_jsonpath
-from jsonpatch_plus.operations import Operation, Operation
-from jsonpatch_plus.tracking import ChangeTracker
+from jsonpatch_trigger import make_jsonpath
+from jsonpatch_trigger.operations import Operation, Operation
+from jsonpatch_trigger.tracking import ChangeTracker
 
 
 def can_pointer_match_path(pointer: JSONPointer, path: JSONPath) -> bool:

@@ -1,5 +1,5 @@
 [project]
-name = "jsonpatch-plus"
+name = "jsonpatch-trigger"
 version = "0.1.0"
 description = "Extension for JSONPatch (RFC6902) that introduces operation preconditions, change tracking and automated listeners that can introduce new operations based on the previous change"
 readme = "README.md"

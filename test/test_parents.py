@@ -1,8 +1,8 @@
 import jsonpath
 from jsonpath import JSONPath
 
-from jsonpatch_plus.common import make_jsonpath
-from jsonpatch_plus.parents import _make_raw_parent, make_parent_key_pairs
+from jsonpatch_trigger.common import make_jsonpath
+from jsonpatch_trigger.parents import _make_raw_parent, make_parent_key_pairs
 
 
 def test_make_raw_parent():
@@ -14,7 +14,7 @@ def test_make_raw_parent():
     assert empty_path == root_path
     assert pseudo_root_path == root_path
 
-    # Important! different forms of writing are unequal if not built using jsonpatch_plus.common.make_jsonpath
+    # Important! different forms of writing are unequal if not built using jsonpatch_trigger.common.make_jsonpath
     assert make_jsonpath('$["a"]') == make_jsonpath('$.a')
     assert jsonpath.compile('$["a"]') != jsonpath.compile('$.a')
 

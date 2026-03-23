@@ -2,7 +2,7 @@ from jsonpath import JSONPath
 from jsonpath.segments import JSONPathRecursiveDescentSegment
 from jsonpath.selectors import JSONPathSelector
 
-from jsonpatch_plus.common import make_jsonpath, normalize_jsonpath
+from jsonpatch_trigger.common import make_jsonpath, normalize_jsonpath
 
 
 def _make_raw_parent(path: JSONPath) -> JSONPath:

@@ -3,7 +3,7 @@ from typing import MutableSequence, MutableMapping, Any
 from jsonpath import JSONPath
 from pydantic import BaseModel
 
-from jsonpatch_plus.compat import PydanticJSONPath
+from jsonpatch_trigger.compat import PydanticJSONPath
 
 
 class PreconditionFunction(BaseModel):

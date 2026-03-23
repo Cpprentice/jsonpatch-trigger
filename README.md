@@ -1,4 +1,4 @@
-# JSONPatch-Plus
+# JSONPatch-Trigger
 
 This package extends the JSON Patch (RFC 6902) functionality with the following features:
 - Preconditions for operations that prevent their execution
