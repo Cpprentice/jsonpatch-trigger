@@ -12,11 +12,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Optional: set up Python if your build needs it
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
+      - name: Install Build
+        run: python -m pip install build
 
       - name: Build
         run: |
@@ -46,15 +48,13 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install .[test]
 
-      - name: Run tests with coverage (fail under 75%)
+      - name: Run tests with coverage
         run: |
-          coverage -m pytest -q \
+          coverage run --include src/* -m pytest -q \
             --maxfail=1 \
-            --cov=src \
-            --cov-report=term-missing:skip-covered \
-            --cov-report=xml \
-            --cov-fail-under=75 \
             tests
+      - name: Create XML Coverage report (fail under 75%)
+        run: coverage xml --fail-under=75
 
       - name: Upload coverage report (XML)
         if: always()
