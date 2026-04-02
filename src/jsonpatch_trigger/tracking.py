@@ -7,6 +7,8 @@ import jsonpath
 from jsonpath import JSONPointer, JSONPatch, JSONPointerIndexError, JSONPointerKeyError
 from pydantic import BaseModel
 
+from jsonpatch_trigger.common import escape_json_pointer_part
+
 
 def get_all_subtree_pointers(
         document: Any,
@@ -18,7 +20,7 @@ def get_all_subtree_pointers(
         return set()
     if isinstance(obj, MutableMapping):
         sub_pointers = {
-            copy.deepcopy(base_pointer).join(key)
+            copy.deepcopy(base_pointer).join(escape_json_pointer_part(key))
             for key in obj.keys()
         }
         return {base_pointer} | sub_pointers | {

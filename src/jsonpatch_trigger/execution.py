@@ -97,6 +97,8 @@ class AutomatedOperationProducer(BaseModel, abc.ABC):
             if cls is not AutomatedOperationProducer:
                 return value
             producer_type = value.pop('producer_type')
+            if value['triggers'] is None:
+                value.pop('triggers')
             return cls._registry[producer_type](**value)
         raise ValidationError("Cannot deserialize automated producer")
 
@@ -178,6 +180,9 @@ class OperationExecutionContext:
 
     def add_custom_operation(self, operation: Operation):
         self.operations.append(operation)
+
+    def insert_custom_operation(self, operation: Operation, index: int):
+        self.operations.insert(index, operation)
 
     def run(self, document: Any) -> Any:
 

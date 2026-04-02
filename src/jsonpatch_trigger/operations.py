@@ -1,6 +1,7 @@
 import abc
 from typing import Any, Annotated, Union, ClassVar, Self
 
+from jsonpatch_trigger.common import escape_json_pointer_part
 from jsonpath import JSONPointer, JSONPath, JSONPathMatch, JSONPointerIndexError, JSONPointerKeyError
 from jsonpath.selectors import NameSelector, JSONPathSelector, IndexSelector
 from pydantic import PrivateAttr, Field, ConfigDict, BaseModel, Discriminator, Tag, computed_field, model_validator, \
@@ -89,7 +90,7 @@ class Operation(BaseModel, abc.ABC):
             for parent_match in parent_path.finditer(document):
                 pointer = JSONPointer.from_match(parent_match)
                 if isinstance(selector, NameSelector):
-                    pointer = pointer.join(selector.name)
+                    pointer = pointer.join(escape_json_pointer_part(selector.name))
                 elif isinstance(selector, IndexSelector):
                     if selector.index == -1:
                         pointer = pointer.join('-')

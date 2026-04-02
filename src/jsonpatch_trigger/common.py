@@ -1,7 +1,7 @@
 from typing import Sequence, Any, Mapping
 
 import jsonpath
-from jsonpath import JSONPath
+from jsonpath import JSONPath, JSONPointer
 from pydantic import TypeAdapter
 from pydantic_core import core_schema
 
@@ -19,6 +19,14 @@ def normalize_jsonpath(path: JSONPath) -> JSONPath:
 def serialize_jsonpath(path: JSONPath) -> str:
     return str(path)
 
+
+def convert_pointer_to_path(pointer: JSONPointer) -> JSONPath:
+    return make_jsonpath('$' + ''.join([f'["{p}"]' for p in pointer.parts]))
+
+
+def escape_json_pointer_part(part: str) -> str:
+    # According to RFC 6901
+    return part.replace('~', '~0').replace('/', '~1')
 
 #
 #

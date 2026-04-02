@@ -16,6 +16,15 @@ def test_get_all_subtree_pointers():
     }, JSONPointer(''))
     assert len(pointers) == 4
 
+    pointers = get_all_subtree_pointers({
+        'a': {
+            'b/c.d': {
+                'e': 42
+            }
+        }
+    }, JSONPointer(''))
+    assert len(pointers) == 4
+
 
 def test_change_tracker_add_pointers():
     change_tracker = ChangeTracker()
