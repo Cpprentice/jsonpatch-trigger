@@ -21,7 +21,8 @@ def get_all_subtree_pointers(
         return set()
     if isinstance(obj, MutableMapping):
         sub_pointers = {
-            copy.deepcopy(base_pointer).join(escape_json_pointer_part(key))
+            # copy.deepcopy(base_pointer).join(escape_json_pointer_part(key))
+            base_pointer.join(escape_json_pointer_part(key))
             for key in obj.keys()
         }
         return {base_pointer} | sub_pointers | {
@@ -31,7 +32,8 @@ def get_all_subtree_pointers(
         }
     elif isinstance(obj, MutableSequence):
         sub_pointers = {
-            copy.deepcopy(base_pointer).join(str(idx))
+            # copy.deepcopy(base_pointer).join(str(idx))
+            base_pointer.join(str(idx))
             for idx in range(len(obj))
         }
         return {base_pointer} | sub_pointers | {
